@@ -8,10 +8,10 @@
 #include <stdlib.h>
 #include "config.h"
 
-#include "json_inttypes.h"
-#include "json_object.h"
-#include "json_tokener.h"
-#include "json_util.h"
+#include <json-c/json_inttypes.h>
+#include <json-c/json_object.h>
+#include <json-c/json_tokener.h>
+#include <json-c/json_util.h>
 
 static void getit(struct json_object *new_obj, const char *field);
 static void checktype_header(void);
@@ -98,7 +98,7 @@ static void checktype(struct json_object *new_obj, const char *field)
 	struct json_object *o = new_obj;
 	if (field && !json_object_object_get_ex(new_obj, field, &o))
 		printf("Field %s does not exist\n", field);
-			
+
 	printf("new_obj%s%-18s: %d,%d,%d,%d,%d,%d,%d\n",
 		field ? "." : " ", field ? field : "",
 		json_object_is_type(o, json_type_null),

@@ -2,6 +2,11 @@
 # and then pass in the appropriate flags deterministically.
 # https://buckaroo.pm
 
+def merge_dicts(x, y):
+  z = x.copy()
+  z.update(y)
+  return z
+
 genrule(
   name = 'config',
   out = 'config.h',
@@ -61,12 +66,17 @@ macos_preprocessor_flags = [
 cxx_library(
   name = 'json-c',
   header_namespace = '',
-  exported_headers = subdir_glob([
+  exported_headers = merge_dicts(subdir_glob([
     ('', '*.h'),
-  ]),
-  headers = {
+  ], prefix = 'json-c'), {
+    'json-c/json_config.h': 'json_config.h.in',
+  }),
+  headers = merge_dicts(subdir_glob([
+    ('', '*.h'),
+  ]), {
     'config.h': ':config',
-  },
+    'json_config.h': 'json_config.h.in',
+  }),
   srcs = glob([
     '*.c',
   ]),
