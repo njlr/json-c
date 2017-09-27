@@ -1,0 +1,13 @@
+cxx_binary(
+  name = 'test_cast',
+  header_namespace = '',
+  headers = {
+    'config.h': '//:config',
+  },
+  srcs = [
+    'test_cast.c',
+  ],
+  deps = [
+    '//:json-c',
+  ],
+)

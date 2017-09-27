@@ -106,3 +106,10 @@
 /include
 /libjson-c.a
 /libjson-c.so
+
+# Buck
+/.buckd/
+/buck-out/
+/buckaroo/
+.buckconfig.local
+BUCKAROO_DEPS
