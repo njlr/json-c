@@ -59,8 +59,8 @@ macos_preprocessor_flags = [
   '-DSIZEOF_LONG_LONG=8',
   '-DSIZEOF_SIZE_T=8',
   # ...
-  '-DPACKAGE_VERSION="0.12.99"',
-  '-DVERSION="0.12.99"',
+  '-DPACKAGE_VERSION="0.12.1"',
+  '-DVERSION="0.12.1"',
 ]
 
 cxx_library(
