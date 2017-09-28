@@ -16,6 +16,15 @@ genrule(
   ],
 )
 
+genrule(
+  name = 'json_config',
+  out = 'json_config.h',
+  cmd = 'touch $OUT',
+  visibility = [
+    '//...',
+  ],
+)
+
 macos_preprocessor_flags = [
   '-DHAVE_ATOMIC_BUILTINS=1',
   '-DHAVE_DECL_INFINITY=1',
@@ -48,17 +57,15 @@ macos_preprocessor_flags = [
   '-DHAVE_SYS_PARAM_H=1',
   '-DHAVE_SYS_STAT_H=1',
   '-DHAVE_SYS_TYPES_H=1',
-  # ...
   '-DHAVE_VASPRINTF=1',
-  # ...
+  '-DHAVE_VSNPRINTF=1',
   '-DHAVE_XLOCALE_H=1',
-  # ...
+  '-DJSON_C_HAVE_INTTYPES_H=1',
   '-DSIZEOF_INT=4',
   '-DSIZEOF_INT64_T=8',
   '-DSIZEOF_LONG=8',
   '-DSIZEOF_LONG_LONG=8',
   '-DSIZEOF_SIZE_T=8',
-  # ...
   '-DPACKAGE_VERSION="0.12.1"',
   '-DVERSION="0.12.1"',
 ]
@@ -75,7 +82,7 @@ cxx_library(
     ('', '*.h'),
   ]), {
     'config.h': ':config',
-    'json_config.h': 'json_config.h.in',
+    'json_config.h': ':json_config',
   }),
   srcs = glob([
     '*.c',
